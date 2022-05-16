@@ -2,8 +2,11 @@ import discord
 import os
 import annonces
 from dotenv import load_dotenv
+from discord.ext import commands
+client = commands.Bot(command_prefix="!", help_command=None)
 
 load_dotenv('.env')
+
 client = discord.Client()
 
 
