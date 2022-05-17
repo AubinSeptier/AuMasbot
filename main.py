@@ -1,15 +1,45 @@
 import discord
+from discord.ext import commands
 import os
-import annonces
 from dotenv import load_dotenv
 
 load_dotenv('.env')
-client = discord.Client()
-
+#client = discord.Client()
+client = commands.Bot(command_prefix='!')
 
 @client.event
 async def on_ready():
     print("Je suis prêt")
 
+# Recherche des fichiers python avec les cogs
+for fn in os.listdir("cogs"):
+    if fn.endswith(".py"):
+        client.load_extension(f"cogs.{fn[:-3]}")
 
+# Chargement des cogs
+@client.command()
+async def load(ctx, extension):
+    client.load_extension(f"extension.{extension}")
+    await ctx.send("Cog chargée")
+
+# Déchargement des cogs
+@client.command()
+async def unload(ctx, extension):
+    client.unload_extension(f"extension.{extension}")
+    await ctx.send("Cog déchargée")
+
+# Rechargement des cogs
+@client.command()
+async def reload(ctx, extension):
+    client.reload_extension(f"extension.{extension}")
+    await ctx.send("Cog rechargée")
+
+
+
+
+####
+
+
+######
+# Démarre le bot
 client.run(os.getenv('DISCORD_TOKEN'))
