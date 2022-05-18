@@ -1,28 +1,32 @@
 import discord
 from discord.ext import commands
+import asyncio
+
+intents = discord.Intents.default()
+intents.members = True
 
 # Classe avec les events annonces
 class Annonce(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    # Salut les nouveaux arrivants
+    # Event pour arrivée d'un membre sur le serveur
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        await member.create_dm()
-        await member.dm_channel.send(
-            f'Bienvenue {member.name} sur le serveur!'
-        )
-        await member.channel.send(f'{member.name} est arrivé sur le serveur')
+        await member.send("Bienvenue sur le serveur")
+        channel = member.guild.get_channel(970243343441362946)
+        await channel.send(f"{member.mention} a rejoint le serveur")
+
+    # Event pour départ d'un membre du serveur
+    @commands.Cog.listener()
+    async def on_member_remove(self, member):
+        channel = member.guild.get_channel(970243343441362946)
+        await channel.send(f"{member.mention} a quitté le serveur")
 
     # Annonce les suppressions de messages
     @commands.Cog.listener()
     async def on_message_delete(self, message):
-        await message.channel.send(f'{message.author} a supprimé un message')
-
-    @commands.command()
-    async def blc(self, ctx):
-        await ctx.send('Nique sa race!')
+        await message.channel.send(f'{message.author} a supprimé un message') #delete_after=5
 
 
 # Initialise le cog
