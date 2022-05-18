@@ -1,14 +1,26 @@
 import discord
 from discord.ext import commands
+from random import randint
 
 
 class Reaction(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["Salut", "Coucou", "Yo"])
+    @commands.command(pass_context=True, aliases=["Salut", "Coucou", "Yo"])
     async def bonjour(self, ctx):
         await ctx.send('Salut !')
+
+    @commands.command(pass_context=True, aliases=["dices", "dés", "dé"])
+    async def dice(self, ctx, nombre: int):
+        result = randint(1, nombre)  # Prend un nombre aléatoire entre 1 et nombre
+        e = discord.Embed(
+            title=f"Tirage du dé !",
+            description=f"Le dé est tombé sur {result} !",
+            color=0x0080ff
+        )
+        e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.send(embed=e)
 
     @commands.Cog.listener()
     async def on_message(self, message):

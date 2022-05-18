@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 
+
 # Classe avec les events annonces
 class Annonce(commands.Cog):
     def __init__(self, client):
