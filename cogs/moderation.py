@@ -49,7 +49,7 @@ class Moderation(commands.Cog):
     @commands.command(pass_context=True, name="clear", aliases=["delete", "del", "suppr"])
     @commands.has_permissions(administrator=True)
     async def clear(self, ctx, limit: int):
-        await ctx.channel.purge(limit=limit+1)
+        await ctx.channel.purge(limit=limit + 1)
         e = discord.Embed(
             title=f"{limit} messages ont été supprimé.",
             color=0xff0000
@@ -70,7 +70,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(administrator=True)
-    async def unban(self, ctx, member: discord.Member):        #on travaille dessus mais pas fonctionnel encore
+    async def unban(self, ctx, member: discord.Member):  # on travaille dessus mais pas fonctionnel encore
         memberName, memberId = member.split("#")
         bannedMembers = await ctx.guild.bans()
         for i in bannedMembers:
@@ -79,10 +79,9 @@ class Moderation(commands.Cog):
                 await ctx.send(f"{member} à été unban.")
                 return
 
-        await ctx.send(f"L'utilisateur {member} n'est pas dans la liste des bans")##  # Si l'utilisateur n'a pas été trouvé
+        await ctx.send(
+            f"L'utilisateur {member} n'est pas dans la liste des bans")  ##  # Si l'utilisateur n'a pas été trouvé
 
 
 def setup(client):
     client.add_cog(Moderation(client))
-
-

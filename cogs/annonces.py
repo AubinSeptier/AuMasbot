@@ -4,6 +4,7 @@ from discord.ext import commands
 intents = discord.Intents.default()
 intents.members = True
 
+
 # Classe avec les events annonces
 class Annonce(commands.Cog):
     def __init__(self, client):
@@ -25,7 +26,7 @@ class Annonce(commands.Cog):
     # Annonce les suppressions de messages
     @commands.Cog.listener()
     async def on_message_delete(self, message):
-        await message.channel.send(f'{message.author} a supprimé un message') #delete_after=5
+        await message.channel.send(f'{message.author} a supprimé un message')  # delete_after=5
 
 
 # Initialise le cog
