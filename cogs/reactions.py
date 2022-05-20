@@ -1,6 +1,7 @@
+from random import randint
+
 import discord
 from discord.ext import commands
-from random import randint
 
 
 class Reaction(commands.Cog):

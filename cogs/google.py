@@ -1,17 +1,19 @@
+import random
+
 import discord
 from discord.ext import commands
 from googleapiclient.discovery import build
-import random
 
 intents = discord.Intents.default()
 intents.members = True
-API_KEY="AIzaSyCG7yr5OD4FgAm6tSSw27gm0F-UAbVT_A4"
+API_KEY = "AIzaSyCG7yr5OD4FgAm6tSSw27gm0F-UAbVT_A4"
+
 
 class Google(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases = ["goog", "search"])
+    @commands.command(aliases=["goog", "search"])
     async def google(self, ctx, *, search):
         key = API_KEY
         ran = random.randint(0, 9)
@@ -38,10 +40,6 @@ class Google(commands.Cog):
         await ctx.send(embed=embed1)
 
 
-
-
-
 # Initialise le cog
 def setup(client):
     client.add_cog(Google(client))
-
