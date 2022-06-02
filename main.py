@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 intents = discord.Intents.default()
 intents.members = True
 load_dotenv('.env')
-client = commands.Bot(command_prefix='!', intents=intents)
+client = commands.Bot(command_prefix='!', intents=intents, help_command=None)
 
 
 @client.event

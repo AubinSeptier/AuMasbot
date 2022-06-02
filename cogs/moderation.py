@@ -68,19 +68,17 @@ class Moderation(commands.Cog):
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
         await ctx.send(embed=e)
 
-    @commands.command()
+    @commands.command(pass_context=True, name="unban", aliases=["réinsertion"])
     @commands.has_permissions(administrator=True)
-    async def unban(self, ctx, member: discord.Member):  # on travaille dessus mais pas fonctionnel encore
-        memberName, memberId = member.split("#")
-        bannedMembers = await ctx.guild.bans()
-        for i in bannedMembers:
-            if i.member.name == memberName and i.member.discriminator == memberId:
-                await ctx.guild.unban(i.member)
-                await ctx.send(f"{member} à été unban.")
-                return
-
-        await ctx.send(
-            f"L'utilisateur {member} n'est pas dans la liste des bans")  # Si l'utilisateur n'a pas été trouvé
+    async def unban(self, ctx, *, member: discord.Member, raison=""):
+        await member.unban(reason=raison)
+        e = discord.Embed(
+            title=f"{member} a été unban, re-bienvenue parmi nous !",
+            description=f"Raison :`{raison}`",
+            color=0xff7f00
+        )
+        e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.send(embed=e)
 
     async def createMutedRole(self, ctx):
         mutedRole = await ctx.guild.create_role(name="Muted",
