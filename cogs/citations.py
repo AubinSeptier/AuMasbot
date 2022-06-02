@@ -14,6 +14,7 @@ class Citation(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    # Fonction permettant de générer des citations personnalisées avec une commande
     @commands.command(aliases=["quote", "cita"])
     async def citation(self, ctx, quote):
         quote_list = ["Oui c'est ça", "Très réel ça", "Ah ouais", "Ratio", "ff", "Je code un bot python",
@@ -26,7 +27,7 @@ class Citation(commands.Cog):
             await ctx.send(random.choice(quote_list))
         if quote == "wormix":
             send_quote = quote_list[0]
-        if quote == "tomichou":
+        if quote == "thomichou":
             send_quote = quote_list[1]
         if quote == "adilou":
             send_quote = quote_list[2]
@@ -38,14 +39,27 @@ class Citation(commands.Cog):
             send_quote = quote_list[5]
         if quote == "aumasbot":
             send_quote = quote_list[6]
-        await ctx.send(send_quote)
+        e = discord.Embed(
+            title=f"{send_quote}",
+            color=0x6F0098
+        )
+        e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.send(embed=e)
 
-    @commands.command(aliases=["linternet"])
+    # Fonction permettant de générer aléatoirement une citation célèbre en anglais
+    @commands.command(name="famous", aliases=["inspiration", "people"])
     async def internet_citation(self, ctx):
         response = requests.get("https://zenquotes.io/api/random")
         json_data = json.loads(response.text)
-        quote = json_data[0]['q'] + " -" + json_data[0]['a']
-        await ctx.send(quote)
+        internet_quote = json_data[0]['q'] + "\n                                                    " \
+                                             "             " + json_data[0]['a']
+        e = discord.Embed(
+            title=f"{internet_quote}",
+            color=0x6F0098
+        )
+        e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.message.delete()
+        await ctx.send(embed=e)
 
 
 # Initialise le cog

@@ -20,7 +20,7 @@ class Google(commands.Cog):
     async def google(self, ctx, *, search):
         key = os.getenv('API_KEY')
         ran = random.randint(0, 9)
-        resource = build("customsearch", "v1", developerKey=key).cse()
+        resource = build("customsearch", "v1", developerKey=os.getenv('API_KEY')).cse()
         result = resource.list(
             q=f"{search}", cx="fbd05fa2f88bc290c", searchType="image"
         ).execute()
