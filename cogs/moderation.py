@@ -51,7 +51,7 @@ class Moderation(commands.Cog):
     async def clear(self, ctx, limit: int):
         await ctx.channel.purge(limit=limit + 1)
         e = discord.Embed(
-            title=f"{limit} messages ont été supprimé.",
+            title=f"{limit} messages ont été supprimés.",
             color=0xff0000
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)

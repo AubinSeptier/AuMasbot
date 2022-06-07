@@ -20,12 +20,11 @@ class Citation(commands.Cog):
         quote_list = ["Oui c'est ça", "Très réel ça", "Ah ouais", "Ratio", "ff", "Je code un bot python",
                       "Je suis Aumasbot!"]
         quote_list_name = "random / wormix / tomichou / adilou / ratio / ff / python / ..."
-        send_quote = str("None")
         if quote == "help":
-            await ctx.send(f"Citations disponibles: {quote_list_name}")
+            send_quote = (f"Citations disponibles: {quote_list_name}")
         if quote == "random":
-            await ctx.send(random.choice(quote_list))
-        if quote == "wormix":
+            send_quote = random.choice(quote_list)
+        if quote == "thomi":
             send_quote = quote_list[0]
         if quote == "thomichou":
             send_quote = quote_list[1]
@@ -44,6 +43,7 @@ class Citation(commands.Cog):
             color=0x6F0098
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
     # Fonction permettant de générer aléatoirement une citation célèbre en anglais
