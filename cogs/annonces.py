@@ -15,7 +15,7 @@ class Annonce(commands.Cog):
     async def on_member_join(self, member):
         await member.send("Bienvenue sur le serveur")
         channel = member.guild.get_channel(970243343441362946)
-        e=discord.Embed(
+        e = discord.Embed(
             title=f"{member.name} a rejoint le serveur",
             color=0x008000
         )
@@ -25,15 +25,15 @@ class Annonce(commands.Cog):
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         channel = member.guild.get_channel(970243343441362946)
-        e=discord.Embed(
+        e = discord.Embed(
             title=f"{member.name} a quitté le serveur",
             color=0x008000
         )
         await channel.send(embed=e)
 
     ## Annonce les suppressions de messages
-    #@commands.Cog.listener()
-    #async def on_message_delete(self, message):
+    # @commands.Cog.listener()
+    # async def on_message_delete(self, message):
     #    await message.channel.send(f'{message.author} a supprimé un message')  # delete_after=5
 
 
