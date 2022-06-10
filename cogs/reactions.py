@@ -1,5 +1,4 @@
 from random import randint
-
 import discord
 from discord.ext import commands
 
@@ -22,14 +21,15 @@ class Reaction(commands.Cog):
 
     @commands.command(pass_context=True, aliases=["vote"])
     async def poll(self, ctx, *, message):
-            pollEmbed = discord.Embed(title="Nouveau Sondage!", description=f"{message}", color=0x0080ff)
-            pollEmbed.set_footer(text=f"Sondage émis par {ctx.author}", icon_url=ctx.author.avatar_url)
-            pollEmbed.timestamp = ctx.message.created_at
-            await ctx.message.delete()
-            poll_msg = await ctx.send(embed=pollEmbed)
+        pollEmbed = discord.Embed(title="Nouveau Sondage!", description=f"{message}", color=0x0080ff)
+        pollEmbed.set_footer(text=f"Sondage émis par {ctx.author}", icon_url=ctx.author.avatar_url)
+        pollEmbed.timestamp = ctx.message.created_at
+        await ctx.message.delete()
+        poll_msg = await ctx.send(embed=pollEmbed)
 
-            await poll_msg.add_reaction("✅")
-            await poll_msg.add_reaction("⭕")
+        await poll_msg.add_reaction("✅")
+        await poll_msg.add_reaction("⭕")
+        await ctx.message.delete()
 
     @commands.command(pass_context=True, aliases=["aide", "ALED"])
     async def help(self, ctx):
@@ -58,6 +58,7 @@ class Reaction(commands.Cog):
             value="Faîtes !helpmedia ou !helpmédia",
             inline=True
         )
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
     @commands.command(pass_context=True, aliases=["helpracine", "helpdebut"])
@@ -69,7 +70,7 @@ class Reaction(commands.Cog):
         )
         e.add_field(
             name="Pour saluer notre super bot",
-            value="Faîtes !bonjour",
+            value="Faîtes !bonjour et il vous répondra gentilment ",
             inline=True
         )
         e.add_field(
@@ -77,6 +78,12 @@ class Reaction(commands.Cog):
             value="Faîtes !infoServeur ou !infoserv ou encore !invoServ",
             inline=True
         )
+        e.add_field(
+            name="Pour créer un sondage",
+            value="Faîtes !poll <question> ou !vote <question>",
+            inline=True
+        )
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
     @commands.command(pass_context=True, aliases=["helpdivert", "helpentertainment"])
@@ -101,11 +108,7 @@ class Reaction(commands.Cog):
             value="Faîtes !linternet pour une citation aléatoire prise sur internet\n !citation <help> pour des citations personnalisées",
             inline=True
         )
-        e.add_field(
-            name="Pour créer un sondage",
-            value="Faîtes !poll <question> ou !vote <question>",
-            inline=True
-        )
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
     @commands.command(pass_context=True, aliases=["helpmodo"])
@@ -115,6 +118,42 @@ class Reaction(commands.Cog):
             description=f"Vous trouverez ici les commandes de modération",
             color=0x008000
         )
+        e.add_field(
+            name="Pour effacer un certain nombre de messages",
+            value="Faîtes !clear <nombre> ou !delete <nombre>",
+            inline=True
+        )
+        e.add_field(
+            name="Pour avertir une personne",
+            value="Faîtes !warn <nom> + [raison] ou !attention <nom> + [raison]",
+            inline=True
+        )
+        e.add_field(
+            name="Pour kick une personne",
+            value="Faîtes !kick <nom> + [raison] ou !kickuser <nom> + [raison]",
+            inline=True
+        )
+        e.add_field(
+            name="Pour mute une personne",
+            value="Faîtes !mute <nom> + [raison]",
+            inline=True
+        )
+        e.add_field(
+            name="Pour unmute une personne",
+            value="Faîtes !unmute <nom> + [raison]",
+            inline=True
+        )
+        e.add_field(
+            name="Pour bannir une personne",
+            value="Faîtes !ban <nom> + |nombre jours| + [raison]",
+            inline=True
+        )
+        e.add_field(
+            name="Pour unban une personne",
+            value="Faîtes !unban <nom> + [raison]",
+            inline=True
+        )
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
     @commands.command(pass_context=True, aliases=["helpmédia"])

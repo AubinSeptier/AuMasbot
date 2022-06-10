@@ -20,6 +20,7 @@ class Moderation(commands.Cog):
             color=0x008000
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
     @commands.command(pass_context=True, name="ban", aliases=["bannir"])
@@ -32,6 +33,7 @@ class Moderation(commands.Cog):
             color=0xff0000
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
     @commands.command(pass_context=True, name="kick", aliases=["kickuser"])
@@ -44,6 +46,7 @@ class Moderation(commands.Cog):
             color=0xff0000
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
     @commands.command(pass_context=True, name="clear", aliases=["delete", "del", "suppr"])
@@ -55,6 +58,7 @@ class Moderation(commands.Cog):
             color=0xff0000
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
     @commands.command(pass_context=True, name="warn", aliases=["attention", "achtung"])
@@ -66,18 +70,7 @@ class Moderation(commands.Cog):
             color=0xff0000
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
-        await ctx.send(embed=e)
-
-    @commands.command(pass_context=True, name="unban", aliases=["réinsertion"])
-    @commands.has_permissions(administrator=True)
-    async def unban(self, ctx, *, member: discord.Member, raison=""):
-        await member.unban(reason=raison)
-        e = discord.Embed(
-            title=f"{member} a été unban, re-bienvenue parmi nous !",
-            description=f"Raison :`{raison}`",
-            color=0xff7f00
-        )
-        e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
     async def createMutedRole(self, ctx):
@@ -107,6 +100,7 @@ class Moderation(commands.Cog):
             color=0xff7f00
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
     @commands.command()
@@ -119,6 +113,7 @@ class Moderation(commands.Cog):
             color=0xff7f00
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.message.delete()
         await ctx.send(embed=e)
 
 

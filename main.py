@@ -1,8 +1,8 @@
 import os
-
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
+
 
 intents = discord.Intents.default()
 intents.members = True
@@ -12,6 +12,8 @@ client = commands.Bot(command_prefix='!', intents=intents, help_command=None)
 
 @client.event
 async def on_ready():
+    await client.change_presence(activity=discord.Streaming(name='ESIREM',
+                                                            url='https://www.twitch.tv/bde_mega'))
     print("Je suis prêt")
 
 

@@ -23,11 +23,6 @@ class Annonce(commands.Cog):
         channel = member.guild.get_channel(970243343441362946)
         await channel.send(f"{member.mention} a quitté le serveur")
 
-    # Annonce les suppressions de messages
-    @commands.Cog.listener()
-    async def on_message_delete(self, message):
-        await message.channel.send(f'{message.author} a supprimé un message')  # delete_after=5
-
 
 # Initialise le cog
 def setup(client):
