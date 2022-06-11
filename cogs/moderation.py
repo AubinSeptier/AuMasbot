@@ -82,6 +82,21 @@ class Moderation(commands.Cog):
         await ctx.send(
             f"L'utilisateur {member} n'est pas dans la liste des bans")  ##  # Si l'utilisateur n'a pas été trouvé
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def massunban(self, ctx):
+        banlist = await ctx.guild.bans()
+        for users in banlist:
+            try:
+                await ctx.guild.unban(user=users.user)
+            except:
+                pass
+        e = discord.Embed(
+            title="La prison des bannis est ouverte !",
+            color=0xff0000
+        )
+        e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        await ctx.send(embed=e)
 
 def setup(client):
     client.add_cog(Moderation(client))

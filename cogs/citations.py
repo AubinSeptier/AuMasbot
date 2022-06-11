@@ -62,6 +62,23 @@ class Citation(commands.Cog):
         await ctx.send(embed=e)
 
 
+    @commands.command(aliases=["btc", "$"])
+    async def bitcoin(self, ctx):
+        response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+        data = response.json()
+        US_price = data["bpi"]["USD"]["rate"]
+        EUR_price = data["bpi"]["EUR"]["rate"]
+        e = discord.Embed(
+            title=f"CryptoMoulaga \U0001F911 \U0001F4B8",
+            description=f"\U0001F1FA\U0001F1F8 {US_price}$ \n\U0001F1EA\U0001F1FA {EUR_price}€",
+            color=0xF4D03F
+        )
+        e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
+        e.set_image(url="https://c.tenor.com/dWr1cf7RN_gAAAAd/money-wwf.gif")
+        e.set_thumbnail(url="https://cdn.futura-sciences.com/buildsv6/images/wide1920/b/8/9/b894848516_50174405_bourse-chute.jpg")
+        await ctx.message.delete()
+        await ctx.send(embed=e)
+
 # Initialise le cog
 def setup(client):
     client.add_cog(Citation(client))
