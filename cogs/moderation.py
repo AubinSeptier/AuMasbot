@@ -16,7 +16,11 @@ class Moderation(commands.Cog):
         serverName = server.name
         e = discord.Embed(
             title=f"Infos serveur",
-            description=f"Bonjour ! \U0001F603\nLe serveur **{serverName}** contient {numberOfPerson} personnes ! \nLa description du serveur est {serverDescription}. \nCe serveur possède {numberOfTextChannels} salons écrit et {numberOfVoiceChannels} salon vocaux, de quoi s'exprimer et donc de s'amuser ! \n\nOn voit souhaite un très bon amusement sur **{serverName}** ! \U0001F609",
+            description=f"Bonjour ! \U0001F603\nLe serveur **{serverName}** contient {numberOfPerson} personnes ! \n"
+                        f"La description du serveur est {serverDescription}. \n"
+                        f"Ce serveur possède {numberOfTextChannels} salons écrit et {numberOfVoiceChannels} salon "
+                        f"vocaux, de quoi s'exprimer et donc de s'amuser ! \n\n"
+                        f"On voit souhaite un très bon amusement sur **{serverName}** ! \U0001F609",
             color=0x008000
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)

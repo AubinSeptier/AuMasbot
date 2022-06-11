@@ -7,13 +7,20 @@ from dotenv import load_dotenv
 intents = discord.Intents.default()
 intents.members = True
 load_dotenv('.env')
-client = commands.Bot(command_prefix='!', intents=intents, help_command=None)
+
+desc = "Bot créé par **Aubin** et **Thomas**\n " \
+        "Je suis ici pour faire de la modération mais aussi pour vous divertir !\n" \
+        "Tapez **!help** pour avoir plus d'informations sur mes fonctionnalités ! \U0001F604\n\n " \
+       "Pour suivre l'actualité de notre école :\n " \
+       "-https://www.instagram.com/bde_mega/\n -https://www.instagram.com/esiremdijon/ " \
+
+
+client = commands.Bot(command_prefix='!', description=desc, intents=intents, help_command=None)
 
 
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Streaming(name='ESIREM',
-                                                            url='https://www.twitch.tv/bde_mega'))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='ESIREM'))
     print("Je suis prêt")
 
 
