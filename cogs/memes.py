@@ -24,6 +24,11 @@ class MemeGenerator(commands.Cog):
     # Fonction permettant de générer des memes personnalisés/customisés/spécifiques
     @commands.command()
     async def meme(self, ctx, image):
+        """
+
+        @param ctx:
+        @param image: mot-clé choisissant l'image
+        """
         memes_list = ["https://imgur.com/gallery/lN0O6Zf.gif", "https://imgur.com/gallery/cuq7xl7.gif",
                       "https://i.imgur.com/xX04UWu.jpg", "https://i.imgflip.com/6hza7t.jpg",
                       "https://i.imgflip.com/6h8gjb.jpg", "https://i.imgflip.com/6iuzcj.jpg",
