@@ -1,6 +1,6 @@
 import random
 
-import aiohttp # Framework permettant une connection client/serveur avec un protocole HTTP
+import aiohttp  # Framework permettant une connection client/serveur avec un protocole HTTP
 import discord
 from discord.ext import commands
 
@@ -9,9 +9,16 @@ class MemeGenerator(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    # Fonction permettant de générer des memes venant du fil Reddit "r/memes"
     @commands.command(aliases=["reddit", "lol"])
     async def rmeme(self, ctx):
+        """
+        Fonction permettant de générer des memes venant du fil Reddit "r/memes"
+        @param ctx: nom de la commande à taper
+
+        Récupère les inforomations du fil reddit et dans un fichier .json à l'aide de la librairie aiohttp
+        Sélectionne de façon random le meme à partir du fichier .json
+        Retourne le meme dans un embed
+        """
         e = discord.Embed(title="Meme de Reddit", color=0x0080ff)
         async with aiohttp.ClientSession() as cs:
             async with cs.get('https://www.reddit.com/r/memes/new.json?sort=hot') as r:
@@ -21,13 +28,16 @@ class MemeGenerator(commands.Cog):
                 await ctx.message.delete()
                 await ctx.send(embed=e)
 
-    # Fonction permettant de générer des memes personnalisés/customisés/spécifiques
     @commands.command()
     async def meme(self, ctx, image):
         """
+        Fonction permettant de générer des memes personnalisés/customisés/spécifiques
+        @param ctx: nom de la commande à taper
+        @param image: argumant choisissant l'image selon le mot-clé attribué
 
-        @param ctx:
-        @param image: mot-clé choisissant l'image
+        memes_list: liste contenant les différents liens des memes
+        Utilise des if afin de choisir la bonne image en utilisant une variable "meme_choice"
+        Retourne le meme choisi dans le channel où a été fait la demande
         """
         memes_list = ["https://imgur.com/gallery/lN0O6Zf.gif", "https://imgur.com/gallery/cuq7xl7.gif",
                       "https://i.imgur.com/xX04UWu.jpg", "https://i.imgflip.com/6hza7t.jpg",
@@ -62,15 +72,20 @@ class MemeGenerator(commands.Cog):
             meme_choice = (memes_list[10])
         await ctx.send(meme_choice)
 
-    #Done le lien du meilleur influenceur de France
     @commands.command()
     async def goat(self, ctx):
+        """
+        Donne le lien du Youtube du meilleur influenceur de France
+        @param ctx: nom de la commande à taper
+
+        Récupération du lien dans "link", suppression de la commande dans le channel et ajout d'un embed
+        Retourne un embed avec le lien de la chaine et une image
+        """
         link = "https://www.youtube.com/c/MattPna"
         await ctx.message.delete()
         e = discord.Embed(title="The GOAT Maatiou", description=f"Toutube: {link}")
         e.set_image(url="https://i.ytimg.com/vi/49UXUbORp0A/maxresdefault.jpg")
         await ctx.send(embed=e)
-
 
 
 # Initialise le cog

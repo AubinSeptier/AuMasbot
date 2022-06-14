@@ -17,6 +17,16 @@ class Citation(commands.Cog):
     # Fonction permettant de générer des citations personnalisées avec une commande
     @commands.command(aliases=["quote", "cita"])
     async def citation(self, ctx, quote):
+        """
+
+        @param ctx: nom de la commande à taper
+        @param quote: argumant choisissant la citation selon le mot-clé attribué
+
+        quote_list: liste des citations disponibles
+        quote_list_name: liste des noms des citations disponibles
+        Utilisation de if pour sélectionner la citation demander selon le mot-clé
+        @return: retourne la citation dans un embed
+        """
         quote_list = ["Oui c'est ça", "Très réel ça", "Ah ouais", "Ratio", "ff", "Je code un bot python",
                       "Je suis Aumasbot!"]
         quote_list_name = "random / wormix / tomichou / adilou / ratio / ff / python / ..."
@@ -46,9 +56,16 @@ class Citation(commands.Cog):
         await ctx.message.delete()
         await ctx.send(embed=e)
 
-    # Fonction permettant de générer aléatoirement une citation célèbre en anglais
     @commands.command(name="famous", aliases=["inspiration", "people"])
     async def internet_citation(self, ctx):
+        """
+        Fonction permettant de générer aléatoirement une citation célèbre en anglais
+        @param ctx: nom de la commande à taper
+
+        Récupère les données du lien dans un fichier text en javascript grâce à la librairie requests
+        Charge le fichier et stocke la citation et l'auteur associé dans une variable
+        @return: la citation dans un embed
+        """
         response = requests.get("https://zenquotes.io/api/random")
         json_data = json.loads(response.text)
         internet_quote = json_data[0]['q'] + "\n                                                    " \
@@ -61,9 +78,16 @@ class Citation(commands.Cog):
         await ctx.message.delete()
         await ctx.send(embed=e)
 
-
     @commands.command(aliases=["btc", "$"])
     async def bitcoin(self, ctx):
+        """
+        Fonction permettant d'obtenir le prix du bitcoin en dollars et en euro à l'instant présent
+        @param ctx: nom de la commande à taper
+
+        Récupère dans un fichier .json les informations du lien grâce à la librairie requests
+        Puis on récupère les données qui nous intéressent dans des variables en "triant"
+        @return: le prix du bitcoin en dollars et euro dans un embed avec images
+        """
         response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
         data = response.json()
         US_price = data["bpi"]["USD"]["rate"]
@@ -75,9 +99,11 @@ class Citation(commands.Cog):
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
         e.set_image(url="https://c.tenor.com/dWr1cf7RN_gAAAAd/money-wwf.gif")
-        e.set_thumbnail(url="https://cdn.futura-sciences.com/buildsv6/images/wide1920/b/8/9/b894848516_50174405_bourse-chute.jpg")
+        e.set_thumbnail(
+            url="https://cdn.futura-sciences.com/buildsv6/images/wide1920/b/8/9/b894848516_50174405_bourse-chute.jpg")
         await ctx.message.delete()
         await ctx.send(embed=e)
+
 
 # Initialise le cog
 def setup(client):
