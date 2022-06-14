@@ -1,21 +1,20 @@
 import os
+
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-
 
 intents = discord.Intents.default()
 intents.members = True
 load_dotenv('.env')
 
 desc = "Bot créé par **Aubin** et **Thomas**\n " \
-        "Je suis ici pour faire de la modération mais aussi pour vous divertir !\n" \
-        "Tapez **!help** pour avoir plus d'informations sur mes fonctionnalités ! \U0001F604\n\n " \
+       "Je suis ici pour faire de la modération mais aussi pour vous divertir !\n" \
+       "Tapez **!help** pour avoir plus d'informations sur mes fonctionnalités ! \U0001F604\n\n " \
        "Pour suivre l'actualité de notre école :\n " \
        "-https://www.instagram.com/bde_mega/\n -https://www.instagram.com/esiremdijon/ " \
-
-
-client = commands.Bot(command_prefix='!', description=desc, intents=intents, help_command=None)
+ \
+    client = commands.Bot(command_prefix='!', description=desc, intents=intents, help_command=None)
 
 
 @client.event
