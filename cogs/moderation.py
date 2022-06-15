@@ -105,7 +105,7 @@ class Moderation(commands.Cog):
         """
         await ctx.channel.purge(limit=limit + 1)
         e = discord.Embed(
-            title=f"{limit} messages ont été supprimé.",
+            title=f"{limit} messages ont été supprimés.",
             color=0xff0000
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
@@ -225,6 +225,7 @@ class Moderation(commands.Cog):
         :param seconds: integer concernant le nombre de secondes que l'on souhaite
 
         :return:On obtient un message de vérification du bot et le channel n'est plus accessible pendant le nombre de secondes choisies.
+
         """
         await ctx.channel.edit(slowmode_delay=seconds)
         e = discord.Embed(
@@ -233,6 +234,30 @@ class Moderation(commands.Cog):
         )
         e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
         await ctx.message.delete()
+        await ctx.send(embed=e)
+
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    async def massunban(self, ctx):
+        """
+        Fonction qui permet aux modérateurs déban toutes les personnes bannies sur le serveur.
+
+        :param ctx: permet d'obtenir des informations par rapport à l'environnement dans lequel la commande a été rentrée.
+        Par exemple le salon Discord, la personne qui a appelée la fonction etc...
+
+        :return:On obtient un message de vérification du bot et le channel n'est plus accessible pendant le nombre de secondes choisies.
+        """
+        banlist = await ctx.guild.bans()
+        for users in banlist:
+            try:
+                await ctx.guild.unban(user=users.user)
+            except:
+                pass
+        e = discord.Embed(
+            title="La prison des bannis est ouverte !",
+            color=0xff0000
+        )
+        e.set_author(name=ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
         await ctx.send(embed=e)
 
 

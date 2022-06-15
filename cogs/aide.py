@@ -14,8 +14,8 @@ class Aide(commands.Cog):
         """
         self.client = client
 
-    @commands.command(pass_context=True, aliases=["aide", "ALED"])
-    async def help(self, ctx):
+    @commands.command(pass_context=True, aliases=["ALED"])
+    async def aide(self, ctx):
         """
         La fonction appelle une liste d'informations concernant les types de commandes par catégories.
 
@@ -83,7 +83,7 @@ class Aide(commands.Cog):
         await ctx.message.delete()
         await ctx.send(embed=e)
 
-    @commands.command(pass_context=True, aliases=["helpdivert", "helpentertainment"])
+    @commands.command(pass_context=True, aliases=["helpdivert"])
     async def helpdiv(self, ctx):
         """
         La fonction appelle une liste d'informations concernant les commandes de divertissement.
